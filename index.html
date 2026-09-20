@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheSimpleYash</title>
+    <meta name="description" content="Developer portfolio showcasing work and expertise">
+    <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    /* Premium color palette - Red, Purple, Green, Blue */
+    --primary-bg: #0a0a0a;
+    --secondary-bg: #111111;
+    --accent-red: #ff3b30;
+    --accent-purple: #9d4edd;
+    --accent-green: #34c759;
+    --accent-blue: #007aff;
+    --accent-pink: #ff2d55;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --text-muted: rgba(255, 255, 255, 0.6);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --primary-bg: #ffffff;
+      --secondary-bg: #f8f9fa;
+      --text-primary: #1a1a1a;
+      --text-secondary: rgba(26, 26, 26, 0.8);
+      --text-muted: rgba(26, 26, 26, 0.6);
+      --glass-bg: rgba(0, 0, 0, 0.02);
+      --glass-border: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  :root[data-theme="light"] {
+    --primary-bg: #ffffff;
+    --secondary-bg: #f8f9fa;
+    --text-primary: #1a1a1a;
+    --text-secondary: rgba(26, 26, 26, 0.8);
+    --text-muted: rgba(26, 26, 26, 0.6);
+    --glass-bg: rgba(0, 0, 0, 0.02);
+    --glass-border: rgba(0, 0, 0, 0.08);
+  }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--primary-bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* Premium cursor effects */
+  .cursor {
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent-purple);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, opacity 0.3s ease;
+    opacity: 0;
+    mix-blend-mode: difference;
+  }
+
+  .cursor.visible {
+    opacity: 0.7;
+  }
+
+  .cursor.hover {
+    width: 36px;
+    height: 36px;
+    background: var(--accent-green);
+    mix-blend-mode: screen;
+  }
+
+  .cursor-trail {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    opacity: 0.8;
+    z-index: -2;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255, 59, 48, 0.1) 0%, transparent 25%),
+      radial-gradient(circle at 80% 70%, rgba(157, 78, 221, 0.1) 0%, transparent 25%),
+      radial-gradient(circle at 40% 40%, rgba(52, 199, 89, 0.1) 0%, transparent 25%),
+      radial-gradient(circle at 60% 20%, rgba(0, 122, 255, 0.1) 0%, transparent 25%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Premium header with logo */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    z-index: 1000;
+    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.7);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+  }
+
+  .logo-img:hover {
+    transform: scale(1.05) rotate(5deg);
+  }
+
+  .logo-text {
+    font-size: 1.75rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-purple), var(--accent-green), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .nav-link {
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-purple), var(--accent-green), var(--accent-blue));
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Hero section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 800px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-purple), var(--accent-green), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    position: relative;
+  }
+
+  .hero-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-purple), var(--accent-green), var(--accent-blue));
+    border-radius: 2px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    font-size: 1.125rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-purple));
+    color: white;
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-red));
+  }
+
+  .btn-secondary {
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: var(--glass-bg);
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2);
+  }
+
+  .btn-icon {
+    font-size: 1.25rem;
+  }
+
+  /* Sections */
+  section {
+    padding: 8rem 2rem;
+    position: relative;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 4rem;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-purple), var(--accent-green), var(--accent-blue));
+    border-radius: 2px;
+  }
+
+  /* Premium cards */
+  .premium-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .premium-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-red), var(--accent-purple), var(--accent-green), var(--accent-blue));
+  }
+
+  .premium-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .premium-card h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .premium-card p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-bottom: 2rem;
+  }
+
+  .skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    margin: 0.25rem;
+  }
+
+  .skill-tag:hover {
+    background: var(--glass-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Skills section */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  /* Projects section */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .project-card {
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--secondary-bg);
+    border: 1px solid var(--glass-border);
+    transition: all 0.4s ease;
+    position: relative;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .project-image {
+    height: 200px;
+    background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .project-content {
+    padding: 1.75rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .project-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .project-tech span {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  /* Contact section */
+  .contact-form {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-group {
+    margin-bottom: 1.75rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .footer-links {
+    margin-top: 1.5rem;
+  }
+
+  .footer-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--text-primary);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 1.5rem;
+    }
+
+    header {
+      padding: 1rem 0;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+    }
+
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 10vw, 3.5rem);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+    }
+
+    section {
+      padding: 6rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .premium-card {
+      padding: 2rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-form {
+      padding: 2rem;
+    }
+  }
+
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* Scroll animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stagger-delay-1 { transition-delay: 0.1s; }
+  .stagger-delay-2 { transition-delay: 0.2s; }
+  .stagger-delay-3 { transition-delay: 0.3s; }
+  .stagger-delay-4 { transition-delay: 0.4s; }
+  .stagger-delay-5 { transition-delay: 0.5s; }
+
+  /* Fun Tools Styles */
+  .fun-tools-content {
+    display: grid;
+    gap: 1.5rem;
+    text-align: left;
+  }
+
+  .fun-tools-content .ip-address,
+  .fun-tools-content .location-info,
+  .fun-tools-content .weather-info,
+  .fun-tools-content .rain-countdown {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+  }
+
+  .fun-tools-content .label {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .fun-tools-content .value {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+  }
+
+  .fun-tools-content .rain-countdown .value {
+    color: var(--accent-blue);
+  }
+
+  .loading,
+  .error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+  }
+
+  .error {
+    color: var(--accent-red);
+  }
+
+  @media (max-width: 768px) {
+    .fun-tools-content {
+      gap: 1rem;
+    }
+
+    .fun-tools-content .ip-address,
+    .fun-tools-content .location-info,
+    .fun-tools-content .weather-info,
+    .fun-tools-content .rain-countdown {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: left;
+    }
+  }
+</style>
+</head>
+<body>
+    <!-- Cursor Elements -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursor-trail"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-container">
+                    <img src="Website2 logo .png" alt="TheSimpleYash Logo" class="logo-img">
+                    <span class="logo-text">TheSimpleYash</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#hero" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#fun-tools" class="nav-link">Fun Tools</a>
+                    <a href="#sites" class="nav-link">Sites</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content fade-in stagger-delay-1">
+                <h1 class="hero-title">Hi, I'm Yash</h1>
+                <p class="hero-subtitle">Full-stack developer & UI/UX enthusiast building modern web applications with passion and precision.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn-primary"><span>View My Work</span><span class="btn-icon">↗</span></a>
+                    <a href="#contact" class="btn-secondary"><span>Get In Touch</span><span class="btn-icon">↗</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="premium-card fade-in stagger-delay-2">
+                <h3><span>👨‍💻</span>Who I Am</h3>
+                <p>I'm a passionate developer with expertise in creating modern, responsive web applications. My journey in technology began with a fascination for how things work, which evolved into a love for building elegant solutions that solve real problems.</p>
+                <p>I specialize in full-stack development with a strong focus on user experience, performance optimization, and clean, maintainable code. When I'm not coding, you can find me exploring new technologies, contributing to open source, or hiking in nature.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-tag fade-in stagger-delay-3"><span>🌐</span>HTML5</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>🎨</span>CSS3</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>⚡</span>JavaScript</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>⚛️</span>React</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>📱</span>React Native</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>🟢</span>Node.js</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>🍃</span>MongoDB</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>🐘</span>PostgreSQL</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>☁️</span>AWS</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>🐳</span>Docker</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>🔧</span>Git</div>
+                <div class="skill-tag fade-in stagger-delay-3"><span>🧪</span>Testing</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fun Tools Section -->
+    <section id="fun-tools" class="section">
+        <div class="container">
+            <h2 class="section-title">Fun Tools</h2>
+            <div class="premium-card fade-in stagger-delay-3">
+                <h3><span>🌤️</span>Your Weather & Location</h3>
+                <div id="weather-info" class="text-center">
+                    <div class="loading">Fetching your location and weather...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sites Section -->
+    <section id="sites" class="section">
+        <div class="container">
+            <h2 class="section-title">My Sites</h2>
+            <div class="skills-grid">
+                <div class="skill-tag fade-in stagger-delay-4"><span>🛠️</span>TheSimpleTools</div>
+                <div class="skill-tag fade-in stagger-delay-4"><span>💼</span>Portfolio Sites</div>
+                <div class="skill-tag fade-in stagger-delay-4"><span>📱</span>Mobile Apps</div>
+                <div class="skill-tag fade-in stagger-delay-4"><span>🌐</span>Web Applications</div>
+                <div class="skill-tag fade-in stagger-delay-4"><span>🎮</span>Gaming Platforms</div>
+                <div class="skill-tag fade-in stagger-delay-4"><span>📊</span>Data Dashboards</div>
+                <div class="skill-tag fade-in stagger-delay-4"><span>🛒</span>E-commerce Stores</div>
+                <div class="skill-tag fade-in stagger-delay-4"><span>📝</span>Blog Platforms</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in stagger-delay-5">
+                    <div class="project-image">💼</div>
+                    <div class="project-content">
+                        <h3>Portfolio Website</h3>
+                        <p>A modern, premium portfolio showcasing my work with advanced UI/UX features including glassmorphism, custom cursor effects, and smooth animations.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in stagger-delay-5">
+                    <div class="project-image">📱</div>
+                    <div class="project-content">
+                        <h3>E-commerce Platform</h3>
+                        <p>A full-stack e-commerce solution with product catalog, shopping cart, payment integration, and admin dashboard.</p>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                            <span>Stripe</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in stagger-delay-5">
+                    <div class="project-image">🎮</div>
+                    <div class="project-content">
+                        <h3>Gaming Community App</h3>
+                        <p>A social platform for gamers to connect, share achievements, and organize gaming sessions with real-time chat.</p>
+                        <div class="project-tech">
+                            <span>React Native</span>
+                            <span>Firebase</span>
+                            <span>WebSocket</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <form action="https://formsubmit.co/thesimpleyash@gmail.com" method="POST" class="contact-form fade-in stagger-delay-6">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="How can I help you?" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn"><span>Send Message</span><span class="btn-icon">↗</span></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> TheSimpleYash. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cursor Effects
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            const cursorTrail = document.getElementById('cursor-trail');
+
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorTrail.style.left = e.clientX + 'px';
+            cursorTrail.style.top = e.clientY + 'px';
+
+            // Add trail effect
+            setTimeout(() => {
+                cursorTrail.style.opacity = '0';
+            }, 100);
+        });
+
+        // Cursor hover effects on interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, .skill-tag, .project-card, .premium-card, .nav-link, .btn-primary, .btn-secondary, .footer-link');
+
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                const cursor = document.getElementById('cursor');
+                cursor.classList.add('hover');
+            });
+
+            element.addEventListener('mouseleave', () => {
+                const cursor = document.getElementById('cursor');
+                cursor.classList.remove('hover');
+            });
+        });
+
+        // Show cursor when mouse moves
+        document.addEventListener('mousemove', () => {
+            const cursor = document.getElementById('cursor');
+            cursor.classList.add('visible');
+
+            // Hide cursor after 3 seconds of inactivity
+            clearTimeout(cursor.hideTimeout);
+            cursor.hideTimeout = setTimeout(() => {
+                cursor.classList.remove('visible');
+            }, 3000);
+        });
+
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme toggle based on system preference
+        const toggleTheme = () => {
+            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        };
+
+        // Initial theme setup
+        toggleTheme();
+
+        // Listen for theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', toggleTheme);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fun Tools: IP, Location, and Weather
+        async function fetchFunToolsData() {
+            const weatherInfo = document.getElementById('weather-info');
+            if (!weatherInfo) return;
+
+            try {
+                // Show loading state
+                weatherInfo.innerHTML = '<div class="loading">Fetching your location and weather...</div>';
+
+                // Fetch IP address
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const userIP = ipData.ip;
+
+                // Fetch location data using IP
+                const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/`);
+                const locationData = await locationResponse.json();
+
+                // Fetch weather data using latitude and longitude
+                const weatherResponse = await fetch(
+                    `https://api.open-meteo.com/v1/forecast?latitude=${locationData.latitude}&longitude=${locationData.longitude}&current=temperature_2m,weather_code,precipitation&hourly=precipitation_probability&timezone=auto`
+                );
+                const weatherData = await weatherResponse.json();
+
+                // Process and display the data
+                displayFunToolsData(userIP, locationData, weatherData);
+            } catch (error) {
+                console.error('Error fetching fun tools data:', error);
+                weatherInfo.innerHTML = `
+                    <div class="error">
+                        <p>Unable to fetch location and weather data.</p>
+                        <p>This might be due to network restrictions or API limits.</p>
+                        <p>Try again later or check your internet connection.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function displayFunToolsData(ip, location, weather) {
+            const weatherInfo = document.getElementById('weather-info');
+
+            // Weather code to description mapping
+            const weatherCodes = {
+                0: "Clear sky",
+                1: "Mainly clear",
+                2: "Partly cloudy",
+                3: "Overcast",
+                45: "Fog",
+                48: "Depositing rime fog",
+                51: "Light drizzle",
+                53: "Moderate drizzle",
+                55: "Dense drizzle",
+                56: "Light freezing drizzle",
+                57: "Dense freezing drizzle",
+                61: "Slight rain",
+                63: "Moderate rain",
+                65: "Heavy rain",
+                66: "Light freezing rain",
+                67: "Heavy freezing rain",
+                71: "Slight snow fall",
+                73: "Moderate snow fall",
+                75: "Heavy snow fall",
+                77: "Snow grains",
+                80: "Slight rain showers",
+                81: "Moderate rain showers",
+                82: "Violent rain showers",
+                85: "Slight snow showers",
+                86: "Heavy snow showers",
+                95: "Thunderstorm",
+                96: "Thunderstorm with slight hail",
+                99: "Thunderstorm with heavy hail"
+            };
+
+            const current = weather.current;
+            const weatherCode = current.weather_code;
+            const weatherDesc = weatherCodes[weatherCode] || "Unknown";
+            const temperature = current.temperature_2m;
+            const precipitation = current.precipitation;
+
+            // Find next precipitation hour for rain countdown
+            let rainInHours = null;
+            let rainInMinutes = null;
+            if (weather.hourly && weather.hourly.time && weather.hourly.precipitation_probability) {
+                const now = new Date();
+                for (let i = 0; i < weather.hourly.time.length; i++) {
+                    const forecastTime = new Date(weather.hourly.time[i]);
+                    const prob = weather.hourly.precipitation_probability[i];
+                    if (prob > 30 && forecastTime > now) { // 30% chance threshold
+                        const diffMs = forecastTime - now;
+                        rainInHours = Math.floor(diffMs / (1000 * 60 * 60));
+                        rainInMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+                        break;
+                    }
+                }
+            }
+
+            // Format the display
+            weatherInfo.innerHTML = `
+                <div class="fun-tools-content">
+                    <div class="ip-address">
+                        <span class="label">Your IP Address:</span>
+                        <span class="value">${ip}</span>
+                    </div>
+                    <div class="location-info">
+                        <span class="label">Location:</span>
+                        <span class="value">${location.city}, ${location.country_name}</span>
+                    </div>
+                    <div class="weather-info">
+                        <span class="label">Weather:</span>
+                        <span class="value">${weatherDesc}, ${temperature}°C</span>
+                    </div>
+                    ${rainInHours !== null ? `
+                        <div class="rain-countdown">
+                            <span class="label">Rain is coming in:</span>
+                            <span class="value">
+                                ${rainInHours > 0 ? rainInHours + 'h ' : ''}
+                                ${rainInMinutes}m
+                            </span>
+                        </div>
+                    ` : `
+                        <div class="rain-countdown">
+                            <span class="label">No rain expected soon</span>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        // Initialize fun tools data fetch
+        fetchFunToolsData();
+
+        // Update weather every 15 minutes
+        setInterval(fetchFunToolsData, 15 * 60 * 1000);
+    </script>
+</body>
+</html>
